@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sdc-libs/types": ["libs/types/src/index.ts"],
+      "@sdc-libs/validation": ["libs/validation/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

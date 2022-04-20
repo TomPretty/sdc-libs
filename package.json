@@ -10,7 +10,8 @@
   "private": true,
   "dependencies": {
     "express": "4.17.2",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "zod": "^3.14.4"
   },
   "devDependencies": {
     "@nrwl/cli": "13.10.3",

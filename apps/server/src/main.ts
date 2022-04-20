@@ -1,9 +1,10 @@
+import { HeaderRequest } from '@sdc-libs/types';
 import * as express from 'express';
 
 const app = express();
 
 app.post('/header', express.json(), (req, res) => {
-  const body = req.body;
+  const body = req.body as HeaderRequest;
 
   console.log({ body });
 
