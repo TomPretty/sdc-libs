@@ -3,7 +3,7 @@ import {
   isCorrectEdition,
   isWithinArticleCountSettings,
   selectTest,
-} from './bannerSelection';
+} from './selection';
 
 describe('selectTest', () => {
   it('selects a test if the targeting matches', () => {
