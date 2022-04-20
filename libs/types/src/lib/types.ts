@@ -1,4 +1,4 @@
-type Edition = 'UK' | 'US' | 'AU';
+export type Edition = 'UK' | 'US' | 'AU';
 export interface HeaderRequest {
   edition: Edition;
 }

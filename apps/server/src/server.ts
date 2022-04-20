@@ -1,6 +1,7 @@
 import { BannerRequest, BannerTest } from '@sdc-libs/types';
 import { bannerRequestSchema, headerRequestSchema } from '@sdc-libs/validation';
 import * as express from 'express';
+import { selectTest } from './bannerSelection';
 import { validate } from './validation';
 
 interface AppOptions {
@@ -27,7 +28,7 @@ export function getApp({ getBannerTests }: AppOptions) {
       const body = req.body as BannerRequest;
 
       const tests = await getBannerTests();
-      const test = findBannerTest(tests, body);
+      const test = selectTest(tests, body);
 
       if (!test) {
         return res.json({ banner: {} });
@@ -47,11 +48,4 @@ export function getApp({ getBannerTests }: AppOptions) {
   );
 
   return app;
-}
-
-function findBannerTest(
-  tests: BannerTest[],
-  request: BannerRequest
-): BannerTest | undefined {
-  return tests.find((t) => t.targeting.edition === request.edition);
 }
