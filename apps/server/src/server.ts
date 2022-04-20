@@ -1,38 +1,52 @@
-import { BannerRequest, HeaderRequest } from '@sdc-libs/types';
+import { BannerRequest, BannerTest, HeaderRequest } from '@sdc-libs/types';
 import { bannerRequestSchema, headerRequestSchema } from '@sdc-libs/validation';
 import * as express from 'express';
 import { validate } from './validation';
 
-export const app = express();
+interface AppOptions {
+  getBannerTests: () => Promise<BannerTest[]>;
+}
 
-app.post(
-  '/header',
-  express.json(),
-  validate(headerRequestSchema),
-  (req, res) => {
-    const body = req.body as HeaderRequest;
+export function getApp({ getBannerTests }: AppOptions) {
+  const app = express();
 
-    console.log({ body });
+  app.post(
+    '/header',
+    express.json(),
+    validate(headerRequestSchema),
+    (req, res) => {
+      const body = req.body as HeaderRequest;
 
-    res.json({ header: 'Thank you' });
-  }
-);
+      console.log({ body });
 
-app.post(
-  '/banner',
-  express.json(),
-  validate(bannerRequestSchema),
-  (req, res) => {
-    const body = req.body as BannerRequest;
+      res.json({ header: 'Thank you' });
+    }
+  );
 
-    console.log({ body });
+  app.post(
+    '/banner',
+    express.json(),
+    validate(bannerRequestSchema),
+    async (req, res) => {
+      const body = req.body as BannerRequest;
 
-    res.json({
-      banner: {
-        props: {
-          copy: { header: 'This is a banner', body: 'Give us lots of money' },
+      console.log({ body });
+
+      const tests = await getBannerTests();
+      const test = tests[0];
+
+      res.json({
+        banner: {
+          meta: {
+            testName: test.name,
+          },
+          props: {
+            copy: test.copy,
+          },
         },
-      },
-    });
-  }
-);
+      });
+    }
+  );
+
+  return app;
+}

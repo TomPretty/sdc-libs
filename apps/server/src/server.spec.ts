@@ -1,9 +1,15 @@
-import { app } from './server';
+import { getApp } from './server';
 import * as supertest from 'supertest';
 import {
   bannerRequestFactory,
+  bannerTestFactory,
   headerRequestFactory,
 } from '@sdc-libs/factories';
+import { BannerTest } from '@sdc-libs/types';
+
+const app = getApp({
+  getBannerTests: () => Promise.resolve([]),
+});
 
 const request = supertest(app);
 
@@ -27,11 +33,18 @@ describe('/header', () => {
 
 describe('/banner', () => {
   it('returns a banner for a valid payload', async () => {
+    const app = getApp({
+      getBannerTests: getBannerTests(
+        bannerTestFactory.build({ name: 'EXAMPLE_TEST' })
+      ),
+    });
+    const request = supertest(app);
     const bannerRequest = bannerRequestFactory.build();
 
     const response = await request.post('/banner').send(bannerRequest);
 
     expect(response.statusCode).toBe(200);
+    expect(response.body.banner.meta.testName).toBe('EXAMPLE_TEST');
   });
 
   it('returns a 400 for an invalid payload', async () => {
@@ -42,3 +55,7 @@ describe('/banner', () => {
     expect(response.statusCode).toBe(400);
   });
 });
+
+// ---- Utils ---- //
+
+const getBannerTests = (test: BannerTest) => () => Promise.resolve([test]);
