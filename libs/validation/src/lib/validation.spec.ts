@@ -1,12 +1,9 @@
-import { HeaderRequest } from '@sdc-libs/types';
+import { headerRequestFactory } from '@sdc-libs/factories';
 import { headerRequestSchema } from './validation';
 
 describe('headerRequestSchema', () => {
   it('validates a valid header request', () => {
-    const headerRequest: HeaderRequest = {
-      articleCount: 0,
-      edition: 'UK',
-    };
+    const headerRequest = headerRequestFactory.build();
 
     const result = headerRequestSchema.safeParse(headerRequest);
 

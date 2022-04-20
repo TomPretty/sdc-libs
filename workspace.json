@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "factories": "libs/factories",
     "server": "apps/server",
     "types": "libs/types",
     "validation": "libs/validation"
