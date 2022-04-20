@@ -1,18 +1,18 @@
-import { getApp } from './server';
-import * as supertest from 'supertest';
 import { headerRequestFactory } from '@sdc-libs/factories';
+import { router } from './router';
+import * as express from 'express';
+import supertest = require('supertest');
 
-const app = getApp({
-  getBannerTests: () => Promise.resolve([]),
-});
+const app = express();
+app.use('/header', router);
 
-const request = supertest(app);
+const st = supertest(app);
 
 describe('/header', () => {
   it('returns a header for a valid payload', async () => {
     const headerRequest = headerRequestFactory.build();
 
-    const response = await request.post('/header').send(headerRequest);
+    const response = await st.post('/header').send(headerRequest);
 
     expect(response.statusCode).toBe(200);
   });
@@ -20,7 +20,7 @@ describe('/header', () => {
   it('returns a 400 for an invalid payload', async () => {
     const headerRequest = { foo: 'bar' };
 
-    const response = await request.post('/header').send(headerRequest);
+    const response = await st.post('/header').send(headerRequest);
 
     expect(response.statusCode).toBe(400);
   });
