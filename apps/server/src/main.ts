@@ -7,6 +7,10 @@ const app = getApp({
         name: 'AUS_MOMENT_TEST',
         targeting: {
           edition: 'AU',
+          articleCountSettings: {
+            min: 5,
+            max: 50,
+          },
         },
         copy: { header: 'This is a banner', body: 'Give us lots of money' },
       },

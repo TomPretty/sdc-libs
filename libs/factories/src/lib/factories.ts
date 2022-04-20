@@ -14,6 +14,9 @@ export const bannerTestFactory = Factory.define<BannerTest>(() => ({
   name: 'EXAMPLE_TEST',
   targeting: {
     edition: 'UK',
+    articleCountSettings: {
+      min: 0,
+    },
   },
   copy: {
     header: 'This is a banner',
