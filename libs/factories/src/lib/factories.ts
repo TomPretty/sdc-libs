@@ -12,6 +12,9 @@ export const bannerRequestFactory = Factory.define<BannerRequest>(() => ({
 
 export const bannerTestFactory = Factory.define<BannerTest>(() => ({
   name: 'EXAMPLE_TEST',
+  targeting: {
+    edition: 'UK',
+  },
   copy: {
     header: 'This is a banner',
     body: 'Give us lots of money',

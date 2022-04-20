@@ -5,6 +5,9 @@ const app = getApp({
     Promise.resolve([
       {
         name: 'AUS_MOMENT_TEST',
+        targeting: {
+          edition: 'AU',
+        },
         copy: { header: 'This is a banner', body: 'Give us lots of money' },
       },
     ]),

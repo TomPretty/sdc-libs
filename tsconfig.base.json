@@ -14,6 +14,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "strict": true,
+    "strictNullChecks": true,
     "paths": {
       "@sdc-libs/factories": ["libs/factories/src/index.ts"],
       "@sdc-libs/types": ["libs/types/src/index.ts"],

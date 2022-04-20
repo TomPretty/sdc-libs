@@ -32,19 +32,39 @@ describe('/header', () => {
 });
 
 describe('/banner', () => {
-  it('returns a banner for a valid payload', async () => {
+  it('returns a banner if there is one that matches the targeting', async () => {
     const app = getApp({
       getBannerTests: getBannerTests(
-        bannerTestFactory.build({ name: 'EXAMPLE_TEST' })
+        bannerTestFactory.build({
+          name: 'EXAMPLE_TEST',
+          targeting: { edition: 'UK' },
+        })
       ),
     });
     const request = supertest(app);
-    const bannerRequest = bannerRequestFactory.build();
+    const bannerRequest = bannerRequestFactory.build({ edition: 'UK' });
 
     const response = await request.post('/banner').send(bannerRequest);
 
     expect(response.statusCode).toBe(200);
     expect(response.body.banner.meta.testName).toBe('EXAMPLE_TEST');
+  });
+
+  it("doesn't return a banner if there isn't one that matches the targeting", async () => {
+    const app = getApp({
+      getBannerTests: getBannerTests(
+        bannerTestFactory.build({
+          targeting: { edition: 'UK' },
+        })
+      ),
+    });
+    const request = supertest(app);
+    const bannerRequest = bannerRequestFactory.build({ edition: 'AU' });
+
+    const response = await request.post('/banner').send(bannerRequest);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.banner).toEqual({});
   });
 
   it('returns a 400 for an invalid payload', async () => {
