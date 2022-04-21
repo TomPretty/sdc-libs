@@ -1,8 +1,21 @@
-import { BannerRequest, BannerTest, HeaderRequest } from '@sdc-libs/types';
+import {
+  BannerRequest,
+  BannerTest,
+  HeaderRequest,
+  HeaderTest,
+} from '@sdc-libs/types';
 import { Factory } from 'fishery';
 
 export const headerRequestFactory = Factory.define<HeaderRequest>(() => ({
   edition: 'UK',
+}));
+
+export const headerTestFactory = Factory.define<HeaderTest>(() => ({
+  name: 'EXAMPLE_TEST',
+  targeting: {
+    edition: 'UK',
+  },
+  copy: 'This is a header',
 }));
 
 export const bannerRequestFactory = Factory.define<BannerRequest>(() => ({

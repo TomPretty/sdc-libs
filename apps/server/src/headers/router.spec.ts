@@ -1,10 +1,18 @@
-import { headerRequestFactory } from '@sdc-libs/factories';
-import { router } from './router';
+import { headerRequestFactory, headerTestFactory } from '@sdc-libs/factories';
+import { getRouter } from './router';
 import * as express from 'express';
 import supertest = require('supertest');
+import { HeaderTest } from '@sdc-libs/types';
+
+const getHeaderTests = (test: HeaderTest) => () => Promise.resolve([test]);
 
 const app = express();
-app.use('/header', router);
+app.use(
+  '/header',
+  getRouter({
+    getHeaderTests: getHeaderTests(headerTestFactory.build()),
+  })
+);
 
 const st = supertest(app);
 
@@ -25,3 +33,11 @@ describe('/header', () => {
     expect(response.statusCode).toBe(400);
   });
 });
+
+// ---- Utils ---- //
+
+// const getSuperTest = (router: express.Router) => {
+//   const app = express();
+//   app.use('/banner', router);
+//   return supertest(app);
+// };

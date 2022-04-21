@@ -9,6 +9,14 @@ export interface HeaderRequest {
   edition: Edition;
 }
 
+export interface HeaderTest {
+  name: string;
+  targeting: {
+    edition: Edition;
+  };
+  copy: string;
+}
+
 export interface BannerRequest {
   articleCount: number;
   edition: Edition;

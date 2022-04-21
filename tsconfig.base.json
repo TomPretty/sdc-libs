@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "strict": true,
     "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@sdc-libs/factories": ["libs/factories/src/index.ts"],

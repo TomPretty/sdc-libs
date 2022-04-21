@@ -1,6 +1,16 @@
 import { getApp } from './server';
 
 const app = getApp({
+  getHeaderTests: () =>
+    Promise.resolve([
+      {
+        name: 'AUS_MOMENT_HEADER_TEST',
+        targeting: {
+          edition: 'AU',
+        },
+        copy: 'This is a header',
+      },
+    ]),
   getBannerTests: () =>
     Promise.resolve([
       {
