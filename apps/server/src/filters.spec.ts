@@ -9,7 +9,7 @@ describe('isCorrectEdition', () => {
     expect(filter.match(test)).toBeTruthy();
   });
 
-  it("doesn't matches if the editions aren't the same", () => {
+  it("doesn't match if the editions aren't the same", () => {
     const filter = isCorrectEdition<Edition>('UK', id);
     const test = 'US' as const;
 

@@ -19,7 +19,7 @@ describe('selectTest', () => {
     expect(result?.name).toBe('EXAMPLE_TEST');
   });
 
-  it("doesn't selects a test if the targeting doesn't match", () => {
+  it("doesn't select a test if the targeting doesn't match", () => {
     const tests = [
       bannerTestFactory.build({
         name: 'EXAMPLE_TEST',
