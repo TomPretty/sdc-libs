@@ -1,5 +1,6 @@
 import { BannerRequest, BannerTest } from '@sdc-libs/types';
 import { isCorrectEdition, isWithinArticleCountSettings } from '../filters';
+import { select } from '../selection';
 
 export function selectTest(
   tests: BannerTest[],
@@ -13,5 +14,5 @@ export function selectTest(
     ),
   ];
 
-  return tests.find((t) => filters.every((f) => f.match(t)));
+  return select(tests, filters);
 }

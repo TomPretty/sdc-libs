@@ -2,6 +2,7 @@ import { HeaderRequest, HeaderTest } from '@sdc-libs/types';
 import { headerRequestSchema } from '@sdc-libs/validation';
 import * as express from 'express';
 import { validate } from '../validation';
+import { selectTest } from './selection';
 
 interface RouterOptions {
   getHeaderTests: () => Promise<HeaderTest[]>;
@@ -18,7 +19,7 @@ export function getRouter({ getHeaderTests }: RouterOptions) {
       const body = req.body as HeaderRequest;
 
       const tests = await getHeaderTests();
-      const test = selectHeader(tests, body);
+      const test = selectTest(tests, body);
 
       if (!test) {
         return res.json({ header: {} });
@@ -38,10 +39,4 @@ export function getRouter({ getHeaderTests }: RouterOptions) {
   );
 
   return router;
-}
-
-function selectHeader(tests: HeaderTest[], request: HeaderRequest) {
-  const test = tests[0];
-
-  return test;
 }

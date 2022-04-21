@@ -1,6 +1,6 @@
 import { ArticleCountSettings, Edition } from '@sdc-libs/types';
 
-interface Filter<T> {
+export interface Filter<T> {
   match: (test: T) => boolean;
 }
 
