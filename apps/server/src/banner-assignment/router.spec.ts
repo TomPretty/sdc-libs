@@ -21,7 +21,7 @@ describe('/banner', () => {
     const response = await st.post('/banner').send(bannerRequest);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.banner.meta.testName).toBe('EXAMPLE_TEST');
+    expect(response.body.assigned).toBeTruthy();
   });
 
   it("doesn't return a banner if there isn't one that matches the targeting", async () => {
@@ -40,7 +40,7 @@ describe('/banner', () => {
     const response = await st.post('/banner').send(bannerRequest);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.banner).toEqual({});
+    expect(response.body.assigned).toBeFalsy();
   });
 
   it('returns a 400 for an invalid payload', async () => {

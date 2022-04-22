@@ -1,7 +1,7 @@
 import { BannerTest, HeaderTest } from '@sdc-libs/types';
 import * as express from 'express';
-import { getRouter as getBannerRouter } from './banners/router';
-import { getRouter as getHeaderRouter } from './headers/router';
+import { getRouter as getBannerRouter } from './banner-assignment/router';
+import { getRouter as getHeaderRouter } from './header-assignment/router';
 
 interface AppOptions {
   getHeaderTests: () => Promise<HeaderTest[]>;
@@ -11,9 +11,9 @@ interface AppOptions {
 export function getApp({ getHeaderTests, getBannerTests }: AppOptions) {
   const app = express();
 
-  app.use('/header', getHeaderRouter({ getHeaderTests }));
+  app.use('/header-assignment', getHeaderRouter({ getHeaderTests }));
 
-  app.use('/banner', getBannerRouter({ getBannerTests }));
+  app.use('/banner-assignment', getBannerRouter({ getBannerTests }));
 
   return app;
 }

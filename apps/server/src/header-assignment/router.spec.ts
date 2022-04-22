@@ -21,7 +21,7 @@ describe('/header', () => {
     const response = await st.post('/header').send(headerRequest);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.header.meta.testName).toBe('EXAMPLE_TEST');
+    expect(response.body.assigned).toBeTruthy();
   });
 
   it("doesn't return a header if there isn't one that matches the targeting", async () => {
@@ -39,7 +39,7 @@ describe('/header', () => {
     const response = await st.post('/header').send(headerRequest);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.header).toEqual({});
+    expect(response.body.assigned).toBeFalsy();
   });
 
   it('returns a 400 for an invalid payload', async () => {

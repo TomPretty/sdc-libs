@@ -22,6 +22,11 @@ export interface BannerRequest {
   edition: Edition;
 }
 
+export interface Copy {
+  header: string;
+  body: string;
+}
+
 export interface BannerTest {
   name: string;
   targeting: {

@@ -1,6 +1,7 @@
 import { BannerRequest, BannerTest } from '@sdc-libs/types';
 import { bannerRequestSchema } from '@sdc-libs/validation';
 import * as express from 'express';
+import { assigned, notAssigned } from '../assignment';
 import { validate } from '../validation';
 import { selectTest } from './selection';
 
@@ -22,19 +23,19 @@ export function getRouter({ getBannerTests }: RouterOptions) {
       const test = selectTest(tests, body);
 
       if (!test) {
-        return res.json({ banner: {} });
+        return res.json(notAssigned());
       }
 
-      res.json({
-        banner: {
+      res.json(
+        assigned({
           meta: {
             testName: test.name,
           },
           props: {
             copy: test.copy,
           },
-        },
-      });
+        })
+      );
     }
   );
 
