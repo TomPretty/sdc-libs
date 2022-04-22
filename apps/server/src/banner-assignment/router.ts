@@ -1,7 +1,7 @@
 import { BannerTest } from '@sdc-libs/types';
 import { bannerRequestSchema } from '@sdc-libs/validation';
 import * as express from 'express';
-import { Request, Response } from 'express';
+import { makeSimpleJsonEndpoint } from '../router';
 import { validate } from '../validation';
 import { getCreate } from './controller';
 
@@ -16,17 +16,8 @@ export function getRouter({ getBannerTests }: RouterOptions) {
     '/',
     express.json(),
     validate(bannerRequestSchema),
-    makeJsonEndpoint(getCreate(getBannerTests))
+    makeSimpleJsonEndpoint(getCreate(getBannerTests))
   );
 
   return router;
 }
-
-// ---- Utils ---- //
-
-const makeJsonEndpoint =
-  <Req, Res>(controllerAction: (req: Req) => Promise<Res>) =>
-  async (req: Request, res: Response) => {
-    const json = await controllerAction(req.body as Req);
-    res.json(json);
-  };
