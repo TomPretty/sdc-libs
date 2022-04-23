@@ -15,6 +15,7 @@ const app = getApp({
     Promise.resolve([
       {
         name: 'AUS_MOMENT_TEST',
+        isOn: false,
         targeting: {
           edition: 'AU',
           articleCountSettings: {

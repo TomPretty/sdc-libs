@@ -1,5 +1,25 @@
 import { ArticleCountSettings, Edition } from '@sdc-libs/types';
-import { isCorrectEdition, isWithinArticleCountSettings } from './filters';
+import {
+  isCorrectEdition,
+  isOn,
+  isWithinArticleCountSettings,
+} from './filters';
+
+describe('isOn', () => {
+  it('matches if the test is on', () => {
+    const filter = isOn<boolean>(id);
+    const test = true;
+
+    expect(filter.match(test)).toBeTruthy();
+  });
+
+  it("doesn't match if the test is off", () => {
+    const filter = isOn<boolean>(id);
+    const test = false;
+
+    expect(filter.match(test)).toBeFalsy();
+  });
+});
 
 describe('isCorrectEdition', () => {
   it('matches if the editions are the same', () => {

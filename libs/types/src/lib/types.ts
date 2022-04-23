@@ -29,6 +29,7 @@ export interface Copy {
 
 export interface BannerTest {
   name: string;
+  isOn: boolean;
   targeting: {
     edition: Edition;
     articleCountSettings: ArticleCountSettings;

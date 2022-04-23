@@ -25,6 +25,7 @@ export const bannerRequestFactory = Factory.define<BannerRequest>(() => ({
 
 export const bannerTestFactory = Factory.define<BannerTest>(() => ({
   name: 'EXAMPLE_TEST',
+  isOn: true,
   targeting: {
     edition: 'UK',
     articleCountSettings: {
